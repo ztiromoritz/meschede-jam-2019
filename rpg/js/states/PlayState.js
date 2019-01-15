@@ -34,21 +34,21 @@
         this.game.stage.backgroundColor = '#0aafe3';
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        this.map = this.game.add.tilemap('map');
+        //this.map = this.game.add.tilemap('map');
         // By conventions the name of tileset in json/tiled this.map
         // and the cacheKey for the tileset image hast to be the same
-        this.map.addTilesetImage('background_tiles2');
+        //this.map.addTilesetImage('background_tiles2');
 
         //Tiles - rastered Tiles with collision
-        this.tileLayer = this.map.createLayer('Tiles');
-        this.tileLayer.resizeWorld();
-        this.map.setCollision(getGIDs('Boden', this.map), true, this.tileLayer);
+        //this.tileLayer = this.map.createLayer('Tiles');
+        //this.tileLayer.resizeWorld();
+        //this.map.setCollision(getGIDs('Boden', this.map), true, this.tileLayer);
 
         //Objects - free moveable objects
         // Platforms -- immovable = true, move = false
-        this.platforms = this.game.add.group();
-        this.platforms.enableBody = true;
-        _.forEach(this.map.getTileinfoByProperty('platform'), function (tileinfo) {
+        //this.platforms = this.game.add.group();
+        //this.platforms.enableBody = true;
+        /*_.forEach(this.map.getTileinfoByProperty('platform'), function (tileinfo) {
             self.map.createFromObjects('Objects', tileinfo.gid, tileinfo.tileset, tileinfo.frame, true, false, self.platforms);
         });
         this.platforms.setAllChildren('body.moves', false);
@@ -56,6 +56,9 @@
         this.platforms.forEach(function (item) {
             item.body.setSize(16, 13, 0, 1);
         });
+
+ 
+
 
         this.npcs = this.game.add.group();
         this.enemies = this.game.add.group();
@@ -67,21 +70,30 @@
                 self.game.add.existing(self.player);
                 self.game.camera.follow(self.player);
             } else if (properties.type === 'npc') {
-                var npc = new NPC(self.game, char.x, char.y, char.properties);
-                self.npcs.add(npc);
+               
             } else if (properties.type === 'enemy') {
-                var enemy1 = new Enemy1(self.game, char.x, char.y);
-                self.enemies.add(enemy1);
+              
             } else if (properties.type === 'checkpoint') {
                 var checkpoint = new Checkpoint(self.game, char.x, char.y);
                 self.checkpoints.add(checkpoint);
             }
         });
+        */
+
+       self.player = new Player(self.game, 100,100);
+       self.game.add.existing(self.player);
+       self.game.camera.follow(self.player);
+
+       var enemy1 = new Enemy1(self.game, 200, 100);
+       self.game.add.existing(enemy1);
+
+       window.PLAYER = self.player;
 
     };
 
     PlayState.prototype.update = function() {
-        this.debugInfo();
+        
+        /*this.debugInfo();
 
         this.physics.arcade.collide(this.player, this.tileLayer);
         this.physics.arcade.collide(this.player, this.platforms);
@@ -103,11 +115,11 @@
         });
         this.physics.arcade.overlap(this.enemies, this.platforms);
 
-
+                */
     };
 
     PlayState.prototype.debugInfo = function() {
-        var self = this;
+       /* var self = this;
         if (this.game.config.enableDebug) {
             this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
             this.game.debug.body(this.player);
@@ -123,6 +135,7 @@
                 self.game.debug.body(item, 'rgba(255,0,0,0.2)');
             });
         }
+        */
     };
 
     global.PlayState = PlayState;

@@ -51,22 +51,27 @@
         //this.game.load.bitmapFont('Parvas', 'assets/fonts/parvas_medium_12.PNG', 'assets/fonts/parvas_medium_12.xml');
 
         //Dialogs
-        this.game.load.text('dialog1', 'assets/dialogs/dialog.twee');
+       // this.game.load.text('dialog1', 'assets/dialogs/dialog.twee');
 
 
-        this.game.load.onFileComplete.add(function (progress, key, success) {
+       /* this.game.load.onFileComplete.add(function (progress, key, success) {
             console.log(progress + '%', key + ' loaded', success);
-        }, game);
+        }, game);*/
 
+    
         this.game.load.onLoadComplete.add(function(){
             //Post processing
-            tweepee.addDialog("test", this.game.cache.getText('dialog1'));
+           // tweepee.addDialog("test", this.game.cache.getText('dialog1'));
+            this.game.state.start("play");
         }, this);
+        
+
+        //this.game.state.start("play");
     };
 
     PreloadState.prototype.create = function(){
         //this.game.state.start("play");
-        this.game.state.start("menu");
+        this.game.state.start("play");
     };
 
     global.PreloadState = PreloadState;

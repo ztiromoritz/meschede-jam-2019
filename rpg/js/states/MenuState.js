@@ -9,7 +9,7 @@
 
     MenuState.prototype.create = function(game){
 
-        this.menu.show();
+        this.menu.hide();
         /*
         this.game.stage.backgroundColor = '#0aafe3';
         var playButton = this.game.add.button(120,100,"startButton",this.startPlay,this,1,0);

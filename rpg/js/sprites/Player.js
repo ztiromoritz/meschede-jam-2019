@@ -11,11 +11,11 @@
 
     var Player = function (game, x, y) {
         Phaser.Sprite.call(this, game, x, y, 'player');
-        this.animations.add('walk', [2, 3], 10, true);
-        this.animations.add('idle', [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4], 10, true);
-        this.animations.add('respawn', [2, 8], 10, true);
+        //this.animations.add('walk', [2, 3], 10, true);
+        //this.animations.add('idle', [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4], 10, true);
+        //this.animations.add('respawn', [2, 8], 10, true);
 
-        this.animations.play('walk', null, false);
+        //this.animations.play('walk', null, false);
 
     };
 

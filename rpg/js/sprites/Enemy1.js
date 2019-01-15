@@ -4,11 +4,11 @@
     var Enemy1 = function (game, x, y) {
         Phaser.Sprite.call(this, game, x, y, 'enemy1');
 
-        this.animations.add('idle', [0, 1], 4, true);
-        this.animations.add('walk', [0, 1, 2, 3, 4, 5, 6, 7], 8, true);
-        this.animations.play('walk');
+        this.animations.add('idle', [0, 0, 0, 1, 2, 2, 2,2], 4, true);
+        this.animations.add('punch', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 8, true);
+        this.animations.play('idle');
         
-        this.scale.x = -1; //flipped
+        //this.scale.x = -1; //flipped
         this.game = game;
     };
 

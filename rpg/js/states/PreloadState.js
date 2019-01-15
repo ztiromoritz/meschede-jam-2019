@@ -19,8 +19,8 @@
         this.game.load.spritesheet('none', 'assets/1px.png', 1, 1);
 
         //Sprites
-        this.game.load.spritesheet('player',        'assets/characters/player/charSprite.png', 16, 16);
-        this.game.load.spritesheet('enemy1',        'assets/characters/enemy1/enemy1.png', 16, 16);
+        this.game.load.spritesheet('player',        'assets/characters/player/gorilla.png', 32, 32);
+        this.game.load.spritesheet('enemy1',        'assets/characters/enemy1/gorillapunch.png', 32, 32);
         this.game.load.spritesheet('npc',           'assets/characters/npc/npcSprite.png', 16, 16);
         this.game.load.spritesheet('checkpoint',    'assets/characters/checkpoint/checkpoint.png', 16, 16);
 

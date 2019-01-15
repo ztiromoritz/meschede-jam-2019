@@ -34,52 +34,6 @@
         this.game.stage.backgroundColor = '#0aafe3';
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        //this.map = this.game.add.tilemap('map');
-        // By conventions the name of tileset in json/tiled this.map
-        // and the cacheKey for the tileset image hast to be the same
-        //this.map.addTilesetImage('background_tiles2');
-
-        //Tiles - rastered Tiles with collision
-        //this.tileLayer = this.map.createLayer('Tiles');
-        //this.tileLayer.resizeWorld();
-        //this.map.setCollision(getGIDs('Boden', this.map), true, this.tileLayer);
-
-        //Objects - free moveable objects
-        // Platforms -- immovable = true, move = false
-        //this.platforms = this.game.add.group();
-        //this.platforms.enableBody = true;
-        /*_.forEach(this.map.getTileinfoByProperty('platform'), function (tileinfo) {
-            self.map.createFromObjects('Objects', tileinfo.gid, tileinfo.tileset, tileinfo.frame, true, false, self.platforms);
-        });
-        this.platforms.setAllChildren('body.moves', false);
-        this.platforms.setAllChildren('body.immovable', true);
-        this.platforms.forEach(function (item) {
-            item.body.setSize(16, 13, 0, 1);
-        });
-
- 
-
-
-        this.npcs = this.game.add.group();
-        this.enemies = this.game.add.group();
-        this.checkpoints = this.game.add.group();
-        this.map.objects.Chars.forEach(function (char) {
-            var properties = getTileProperties(char.gid, self.map);
-            if (properties.type === 'player') {
-                self.player = new Player(self.game, char.x, char.y);
-                self.game.add.existing(self.player);
-                self.game.camera.follow(self.player);
-            } else if (properties.type === 'npc') {
-               
-            } else if (properties.type === 'enemy') {
-              
-            } else if (properties.type === 'checkpoint') {
-                var checkpoint = new Checkpoint(self.game, char.x, char.y);
-                self.checkpoints.add(checkpoint);
-            }
-        });
-        */
-
        self.player = new Player(self.game, 100,100);
        self.game.add.existing(self.player);
        self.game.camera.follow(self.player);
@@ -88,34 +42,19 @@
        self.game.add.existing(enemy1);
 
        window.PLAYER = self.player;
+       this.playerhealth= 100;
+       this.enemy1health= 250;
 
     };
 
     PlayState.prototype.update = function() {
+        this.renderhealth()
         
-        /*this.debugInfo();
+    };
 
-        this.physics.arcade.collide(this.player, this.tileLayer);
-        this.physics.arcade.collide(this.player, this.platforms);
-        this.physics.arcade.collide(this.player, this.checkpoints,null, function(player, checkpoint){
-            player.setRespawnPoint();
-            checkpoint.trigger();
-            return false;
-        });
-        this.physics.arcade.collide(this.enemies, this.tileLayer);
-        this.npcs.callAll("modeClear");
-        this.player.modeClear();
-        this.physics.arcade.overlap(this.player, this.npcs, null, function(player, npc){
-            player.setCurrentNPC(npc);
-            npc.playerIsNear();
-        });
-        this.physics.arcade.collide(this.player,this.enemies,null ,function( player, enemy){
-            player.killMe();
-            return false; // TO avoid physical reaction
-        });
-        this.physics.arcade.overlap(this.enemies, this.platforms);
-
-                */
+    PlayState.prototype.renderhealth = function() {
+        document.querySelector("#playerhealth").innerHTML=this.playerhealth
+        document.querySelector("#enemy1health").innerHTML=this.enemy1health
     };
 
     PlayState.prototype.debugInfo = function() {

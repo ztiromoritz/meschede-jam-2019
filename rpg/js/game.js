@@ -9,7 +9,6 @@
     );
 
     game.state.add("preload", PreloadState);
-    game.state.add("menu", MenuState);
     game.state.add("play", PlayState);
     game.state.start("preload");
 

@@ -110,11 +110,29 @@ html {
     height: 100px;
     right: 5px;
     left: 5px;
-    bottom:5px;
+    bottom:5px; 
     /*display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;*/
+}
+
+
+#playerbar {
+    background-color: lightgray;
+    border: 2px solid white;
+    position: absolute;
+    z-index: 0;
+    top: 10px;
+    left: 50px;
+    width: 80px;
+    height: 10px;
+}
+
+#playerbar .value {
+    background-color: green;
+    height: 100%;
+    width: 60%;
 }
 
 #menu .button{

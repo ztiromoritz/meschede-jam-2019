@@ -10,30 +10,26 @@
 </head>
 <body>
 <div  class="wrapper">
-    <!----><div class="controlsLeft">
-        <div class="A"></div>
-        <div class="B"></div>
-        <div class="C"></div>
-    </div>
 
    <div id="playground">
         <div id="game"></div>
+        <div id="playerbar">
+            <div class="value">
+                
+            </div>
+        </div>
         <div id="menu">
-            <button>Attack</button>
-            <button>Dodge</button>
+            <button id="attackButton">Attack</button>
+            <button id="dodgeButton">Dodge</button>
             <div id="playerhealth"></div>
             <div id="enemy1health"></div>
         </div>
     </div>
-    <div class="controlsRight">
-        <div class="D"></div>
-        <div class="E"></div>
-        <div class="F"></div>
-    </div>
+    
 </div>
 
 
-<script src="./lib/phaser.js"></script>
+<script src="./lib/phaser-2.4.9.js"></script>
 <script src="./lib/garfunkel.js"></script>
 
 <script type="text/javascript" src="./bower_components/lodash/lodash.min.js"></script>
@@ -51,9 +47,8 @@
 <script type="text/javascript" src="./js/sprites/Player.js"></script>
 <script type="text/javascript" src="./js/sprites/Enemy1.js"></script>
 
-
+<script type="text/javascript" src="./js/fight.js"></script>
 <script type="text/javascript" src="./js/states/PreloadState.js"></script>
-<script type="text/javascript" src="./js/states/MenuState.js"></script>
 <script type="text/javascript" src="./js/states/PlayState.js"></script>
 <script type="text/javascript" src="./js/game.js"></script>
 

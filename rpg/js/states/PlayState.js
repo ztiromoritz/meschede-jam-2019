@@ -31,8 +31,11 @@
     PlayState.prototype.create = function(){
         var self = this;
         //config/gloabl stuff
+     
         this.game.stage.backgroundColor = '#0aafe3';
-        this.game.physics.startSystem(Phaser.Physics.ARCADE);
+        //this.game.physics.startSystem(Phaser.Physics.ARCADE);
+
+        this.game.add.tileSprite(0, 0, 1000, 600, 'background');  
 
        self.player = new Player(self.game, 100,100);
        self.game.add.existing(self.player);
@@ -41,40 +44,43 @@
        var enemy1 = new Enemy1(self.game, 200, 100);
        self.game.add.existing(enemy1);
 
-       window.PLAYER = self.player;
+       /*
        this.playerhealth= 100;
        this.enemy1health= 250;
+       */
+
+       window.PLAYER = self.player;
+       window.ENEMY = enemy1;
+
+       this.fight = window.createFight({
+            game: this.game,
+            enemy: enemy1, 
+            player: self.player, 
+            playerhealth: 100, 
+            enemyhealth: 250});
+
+       document.querySelector('#dodgeButton').addEventListener('click', ()=>{
+           this.fight.onDodgeButton();
+       })
+
+       document.querySelector('#attackButton').addEventListener('click', ()=>{
+        this.fight.onAttackButton();
+    })
+
 
     };
 
     PlayState.prototype.update = function() {
-        this.renderhealth()
-        
+        this.renderhealth()       
     };
 
     PlayState.prototype.renderhealth = function() {
-        document.querySelector("#playerhealth").innerHTML=this.playerhealth
-        document.querySelector("#enemy1health").innerHTML=this.enemy1health
+        document.querySelector("#playerhealth").innerHTML=this.fight.getPlayerHealth();
+        document.querySelector("#enemy1health").innerHTML=this.fight.getEnemyHealth();
     };
 
     PlayState.prototype.debugInfo = function() {
-       /* var self = this;
-        if (this.game.config.enableDebug) {
-            this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
-            this.game.debug.body(this.player);
-            this.platforms.forEach(function (item) {
-                self.game.debug.body(item);
-            });
-
-            this.npcs.forEach(function (item) {
-                self.game.debug.body(item, 'rgba(0,255,0,0.2)');
-            });
-
-            this.checkpoints.forEach(function (item) {
-                self.game.debug.body(item, 'rgba(255,0,0,0.2)');
-            });
-        }
-        */
+      
     };
 
     global.PlayState = PlayState;

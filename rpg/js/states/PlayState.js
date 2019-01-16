@@ -65,7 +65,11 @@
 
        document.querySelector('#attackButton').addEventListener('click', ()=>{
         this.fight.onAttackButton();
-    })
+        })
+
+        document.querySelector('#blockButton').addEventListener('click', ()=>{
+            this.fight.onBlockButton();
+            })
 
 
     };

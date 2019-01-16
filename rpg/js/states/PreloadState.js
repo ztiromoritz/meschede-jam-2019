@@ -19,11 +19,12 @@
         this.game.load.spritesheet('none', 'assets/1px.png', 1, 1);
 
         //Sprites
-        this.game.load.spritesheet('player',        'assets/characters/player/gorilla.png', 32, 32);
-        this.game.load.spritesheet('enemy1',        'assets/characters/enemy1/gorillapunch.png', 32, 32);
+        this.game.load.spritesheet('player',        'assets/characters/player/player.png', 32, 32);
+        this.game.load.spritesheet('enemy1',        'assets/characters/enemy1/gorillacomplete.png', 32, 32);
 
         // Background 
         this.game.load.image('background', 'assets/background/background.png');
+        this.game.load.image('tot', 'assets/background/tot.png');
        
         //Sounds & Music
         this.game.load.audio('jump',        'assets/sounds/jump.wav');

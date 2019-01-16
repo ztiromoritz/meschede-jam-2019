@@ -10,16 +10,17 @@
     };
 
     var Player = function (game, x, y) {
-        Phaser.Sprite.call(this, game, x, y, 'enemy1');
-        this.animations.add('idle', [0, 0, 0, 1, 2, 2, 2,2], 4, true);
-        this.animations.add('punch', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 8, true);
-        this.scale.x = -2;
+        Phaser.Sprite.call(this, game, x, y, 'player');
+        this.animations.add('idle', [43, 44, 45], 4, true);
+        this.animations.add('slash', [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], 8, true);
+        this.animations.add('hurt', [22, 23, 24, 25, 26, 27], 8, true);
+        this.animations.add('dead', [28, 29, 30, 31, 32, 33, 34, 35, 36, 37], 8, true);
+        this.animations.add('dodge' [38, 39, 40, 41, 42, 43], 8, true);
+        this.scale.x = 2;
         this.scale.y = 2;
-        //this.animations.add('walk', [2, 3], 10, true);
-        //this.animations.add('idle', [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 4], 10, true);
-        //this.animations.add('respawn', [2, 8], 10, true);
 
-        //this.animations.play('walk', null, false);
+
+        this.animations.play('idle', null, true);
 
     };
 

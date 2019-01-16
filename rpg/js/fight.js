@@ -27,12 +27,12 @@
         const onAttackButton  = ()=>{
             // Called on dodge button
             console.log("Dodge");
-            
-            enemy.animations.play("hurt", null, false)
+            clearAnimations();
+            enemy.animations.play("hurt", null, false);
             player.animations.play("slash", null, false).onComplete
             .addOnce(()=>{
                 enemyAttack(false);
-                player.animations.play("idle", null, true)
+                //player.animations.play("idle", null, true);
             });
             setEnemyHealth(enemyhealth-25);
             enableButton(false);
@@ -52,7 +52,8 @@
             if(dodge) { // DODGE ========
 
                 if(move == "attack"){
-                    player.animations.play("dodge", null, false)
+                    clearAnimations();
+                    player.animations.play("dodge", null, false);
                     enemy.animations.play("punch", null, false).onComplete.addOnce(() =>{
                         enableButton(true);
                         enemy.animations.play('idle')
@@ -61,9 +62,10 @@
                 }
                 
                 if(move == "idle"){
+                    clearAnimations();
                     player.animations.play("dodge", null, false);
                     enemy.animations.play("idle", null, false).onComplete.addOnce(() =>{
-                        debugger;
+                       // debugger;
                         enableButton(true);
                         //enemy.animations.play('idle')
                         //player.animations.play('idle')
@@ -71,16 +73,12 @@
                     
                     
                 }
-
-
 // DODGE ==========================
-            } 
-            
-            else {
+            } else {
                 if(move == "attack"){
+                    clearAnimations();
                     player.animations.play("hurt", null, false)
-                    enemy.animations.play("punch", null, false).onComplete
-                    .addOnce(()=>{
+                    enemy.animations.play("punch", null, false).onComplete.addOnce(()=>{
                         enableButton(true);
                         setPlayerHealth(playerhealth-50);
                         player.animations.play("idle")
@@ -89,18 +87,21 @@
                 }
                     
                 if(move == "idle"){
-                    player.animations.play("idle", null, false)
+                    clearAnimations();
+                    player.animations.play("idle", null, false);
                     enemy.animations.play("idle", null, false).onComplete.addOnce(() =>{
                             enableButton(true);
                             enemy.animations.play('idle')
                             player.animations.play('idle')
                     });
                 }
-                      
-
-               
             }
 
+        }
+
+        const clearAnimations = ()=>{
+            enemy.animations.stop(); // 
+            player.animations.stop(); // 
         }
 
         const gameOver = () => {

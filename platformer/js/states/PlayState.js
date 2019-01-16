@@ -57,26 +57,18 @@
             item.body.setSize(16, 13, 0, 1);
         });
 
-        this.npcs = this.game.add.group();
+        
         this.enemies = this.game.add.group();
-        this.checkpoints = this.game.add.group();
         this.map.objects.Chars.forEach(function (char) {
             var properties = getTileProperties(char.gid, self.map);
             if (properties.type === 'player') {
                 self.player = new Player(self.game, char.x, char.y);
                 self.game.add.existing(self.player);
-                self.game.camera.follow(self.player);
-            } else if (properties.type === 'npc') {
-                var npc = new NPC(self.game, char.x, char.y, char.properties);
-                self.npcs.add(npc);
-            } else if (properties.type === 'enemy') {
-                var enemy1 = new Enemy1(self.game, char.x, char.y);
-                self.enemies.add(enemy1);
-            } else if (properties.type === 'checkpoint') {
-                var checkpoint = new Checkpoint(self.game, char.x, char.y);
-                self.checkpoints.add(checkpoint);
+                //self.game.camera.follow(self.player);
             }
         });
+        this.enemy1 = new Enemy1(self.game, 32,220);
+                self.enemies.add(this.enemy1);
 
     };
 
@@ -85,23 +77,15 @@
 
         this.physics.arcade.collide(this.player, this.tileLayer);
         this.physics.arcade.collide(this.player, this.platforms);
-        this.physics.arcade.collide(this.player, this.checkpoints,null, function(player, checkpoint){
-            player.setRespawnPoint();
-            checkpoint.trigger();
-            return false;
-        });
-        this.physics.arcade.collide(this.enemies, this.tileLayer);
-        this.npcs.callAll("modeClear");
+        
+        //this.physics.arcade.collide(this.enemies, this.tileLayer);
+        
         this.player.modeClear();
-        this.physics.arcade.overlap(this.player, this.npcs, null, function(player, npc){
-            player.setCurrentNPC(npc);
-            npc.playerIsNear();
-        });
+        
         this.physics.arcade.collide(this.player,this.enemies,null ,function( player, enemy){
             player.killMe();
             return false; // TO avoid physical reaction
         });
-        this.physics.arcade.overlap(this.enemies, this.platforms);
 
 
     };
@@ -111,16 +95,9 @@
         if (this.game.config.enableDebug) {
             this.game.debug.text(this.game.time.fps || '--', 2, 14, "#00ff00");
             this.game.debug.body(this.player);
+            this.game.debug.body(this.enemy1);
             this.platforms.forEach(function (item) {
                 self.game.debug.body(item);
-            });
-
-            this.npcs.forEach(function (item) {
-                self.game.debug.body(item, 'rgba(0,255,0,0.2)');
-            });
-
-            this.checkpoints.forEach(function (item) {
-                self.game.debug.body(item, 'rgba(255,0,0,0.2)');
             });
         }
     };

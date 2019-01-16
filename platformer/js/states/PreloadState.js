@@ -8,7 +8,7 @@
     PreloadState.prototype.preload = function(){
         //Settings
         this.game.stage.smoothed = false;
-        this.game.config.enableDebug = false;
+        this.game.config.enableDebug = true;
         this.game.scale.fullScreenScaleMode = Phaser.ScaleManager.USER_SCALE;
         this.game.scale.scaleMode = Phaser.ScaleManager.USER_SCALE;
         this.game.scale.setUserScale(2, 2);
@@ -20,7 +20,7 @@
 
         //Sprites
         this.game.load.spritesheet('player',        'assets/characters/player/charSprite.png', 16, 16);
-        this.game.load.spritesheet('enemy1',        'assets/characters/enemy1/enemy1.png', 16, 16);
+        this.game.load.spritesheet('enemy1',        'assets/characters/player/nashorn.png', 32, 32);
         this.game.load.spritesheet('npc',           'assets/characters/npc/npcSprite.png', 16, 16);
         this.game.load.spritesheet('checkpoint',    'assets/characters/checkpoint/checkpoint.png', 16, 16);
 

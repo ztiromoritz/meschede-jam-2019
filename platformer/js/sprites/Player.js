@@ -36,11 +36,11 @@
             this.canJump = true;
         }, this);
         //Dialog handling
-        var space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-        space.onDown.add( this.startTalk, this);
+        this.space = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        this.space.onDown.add( this.startTalk, this);
         talk.init().onClose( this.stopTalk, this);
 
-        this.hit = game.add.audio('hit');
+       // this.hit = game.add.audio('hit');
         this.jump = game.add.audio('jump');
 
     };
@@ -71,12 +71,12 @@
                 flipRight(this);
                 idle = false;
             }
-            if ((this.cursors.up.isDown || gamepad.state.B || gamepad.state.E) &&
+            if ((this.cursors.up.isDown||this.space.isDown || gamepad.state.B || gamepad.state.E) &&
             (this.body.onFloor() || this.body.touching.down) &&
             this.canJump) {
                 this.body.velocity.y = -300;
                 idle = false;
-                this.canJump = false;
+                this.canJump = true;
                 this.jump.play();
             }
             break;

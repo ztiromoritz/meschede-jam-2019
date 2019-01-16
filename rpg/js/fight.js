@@ -43,7 +43,7 @@
             //player.animations.play("block",null, false).onComplete
 
         }
-        const pattern = ["attack", "idle", "attack", "attack", "idle", "idle","idle", "attack"];
+        const pattern = ["attack", "idle", "attack", "attack", "idle", "idle", "attack"];
         let current = 0;
         const enemyAttack = (dodge)=>{
             const move = pattern[current];
@@ -61,8 +61,7 @@
                 }
                 
                 if(move == "idle"){
-                   // debugger;
-                    //player.animations.play("dodge", null, false);
+                    player.animations.play("dodge", null, false);
                     enemy.animations.play("idle", null, false).onComplete.addOnce(() =>{
                         debugger;
                         enableButton(true);
@@ -104,15 +103,20 @@
 
         }
 
-        /*const gameOver = () => {
+        const gameOver = () => {
+            document.querySelector("#gameover").style.display="flex";
 
-            if(playerhealth==0) {
-                player.animations.play("dead", null, false).onComplete.addOnce(()=>{
-
-                })
+            if(playerhealth<=0) {
+                player.animations.play("dead", null, false)
             }
+        }
+        const victory = () => {
+            document.querySelector("#victory").style.display="flex";
 
-        }*/
+            if(playerhealth<=0) {
+                player.animations.play("dead", null, false)
+            }
+        }
 
         const enableButton =(enable)=>{
             [... document.querySelectorAll("button")].forEach((b)=>{b.disabled=!enable;})
@@ -131,9 +135,16 @@
         }
 
         const getPlayerHealth = ()=>playerhealth;
-        const setPlayerHealth = (value)=>{playerhealth = value;};
+        const setPlayerHealth = (value)=>{
+            playerhealth = value;
+            if(playerhealth <= 0){gameOver();}
+        
+        };
         const getEnemyHealth = ()=>enemyhealth;
-        const setEnemyHealth = (value)=>{enemyhealth = value};
+        const setEnemyHealth = (value)=>{
+            enemyhealth = value
+            if(enemyhealth <= 0) {victory();}
+        };
 
         const fight = {
             onDodgeButton,

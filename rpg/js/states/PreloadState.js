@@ -24,8 +24,8 @@
 
         // Background 
         this.game.load.image('background', 'assets/background/background.png');
-        this.game.load.image('tot', 'assets/background/tot.png');
-       
+
+        
         //Sounds & Music
         this.game.load.audio('jump',        'assets/sounds/jump.wav');
         this.game.load.audio('hit',         'assets/sounds/hit.wav');

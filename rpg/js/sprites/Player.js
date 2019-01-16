@@ -12,10 +12,10 @@
     var Player = function (game, x, y) {
         Phaser.Sprite.call(this, game, x, y, 'player');
         this.animations.add('idle', [43, 44, 45], 4, true);
-        this.animations.add('slash', [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], 8, true);
-        this.animations.add('hurt', [22, 23, 24, 25, 26, 27], 8, true);
-        this.animations.add('dead', [28, 29, 30, 31, 32, 33, 34, 35, 36, 37], 8, true);
-        this.animations.add('dodge' [38, 39, 40, 41, 42, 43], 8, true);
+        this.animations.add('slash', [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21], 4, true);
+        this.animations.add('hurt', [22, 23, 24, 25, 26, 27], 4, true);
+        this.animations.add('dead', [28, 29, 30, 31, 32, 33, 34, 35, 36, 37], 4, true);
+        this.animations.add('dodge', [38, 39, 40, 41, 42, 43], 4, true);
         this.scale.x = 2;
         this.scale.y = 2;
 

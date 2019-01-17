@@ -1,0 +1,52 @@
+!<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Meschede 2019</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+<body>
+
+    <iframe id="rpg-spinne" src=""></iframe>
+    <iframe id="rpg-gorilla" src="./rpg/game.html"></iframe>
+    <iframe id="pac-mensch" src="./pac/index.html"></iframe>
+    <iframe id="platformer-rino" src="./platformer/game.html"></iframe>
+    <iframe id="platformer-spinne" src="./platformer/game.html?spider"></iframe>
+    <iframe id="twine" src="./twine/index.html"></iframe>
+
+    <script>
+
+        const hideAll = ()=>{
+            [...document.querySelectorAll("iframe")].forEach((frame)=>{
+                frame.style.display = 'none';
+            })   
+        };
+
+
+        const showFrame = (name)=>{
+            hideAll();
+            document.querySelector(`#${name}`).style.display = 'block';
+        };
+
+
+
+        window.addEventListener("message", (event)=>{
+            const command = event.data.command;
+            ({
+                hideAll: ()=>{hideAll();},
+                showRPGSpinne: ()=>{showFrame("rpg-spinne");},
+                showRPGGorilla: ()=>{showFrame("rpg-gorilla");},
+                showPacMensch: ()=>{showFrame("pac-mensch");},
+                showPlatformRino: ()=>{showFrame("platformer-rino");},
+                showPlatformSpinne: ()=>{showFrame("platformer-spinne");},
+                showTwine: ()=>{showFrame("twine");},
+            }[command] || (()=>{
+                console.log("unknow command received", event.data);
+            }))();
+        });
+    </script>
+    
+</body>
+</html>

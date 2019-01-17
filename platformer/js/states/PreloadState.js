@@ -23,7 +23,7 @@
         this.game.load.spritesheet('enemy1',        'assets/characters/player/nashorn.png', 32, 32);
         this.game.load.spritesheet('npc',           'assets/characters/npc/npcSprite.png', 16, 16);
         this.game.load.spritesheet('checkpoint',    'assets/characters/checkpoint/checkpoint.png', 16, 16);
-
+        this.game.load.spritesheet('spider',        'assets/characters/player/charSprite.png', 16, 16);
         //this.game.load.spritesheet('player',        'assets/characters/player/dummy.png', 16, 16);
         //this.game.load.spritesheet('enemy1',        'assets/characters/enemy1/dummy.png', 16, 16);
         //this.game.load.spritesheet('npc',           'assets/characters/npc/dummy.png', 16, 16);
@@ -36,7 +36,9 @@
 
         //Map: Level und Tiles
         this.game.load.tilemap('map', 'assets/tilemaps/tiled-map.json', null, Phaser.Tilemap.TILED_JSON);
+        this.game.load.tilemap('map-spider', 'assets/tilemaps/tiled-map-spider.json', null, Phaser.Tilemap.TILED_JSON);
         this.game.load.spritesheet('background_tiles2', 'assets/tilemaps/background_tiles2.png', 16, 16);
+        this.game.load.spritesheet('background_tiles-spinne', 'assets/tilemaps/background_tiles-spinne.png', 16, 16);
         //this.game.load.spritesheet('background_tiles2', 'assets/tilemaps/dummy.png', 16, 16);
 
         //Sounds & Music

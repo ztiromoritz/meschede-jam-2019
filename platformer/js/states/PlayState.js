@@ -34,10 +34,18 @@
         this.game.stage.backgroundColor = '#0aafe3';
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
-        this.map = this.game.add.tilemap('map');
+        
+        
+        if (spider) {
+            this.map = this.game.add.tilemap('map-spider');
+            this.map.addTilesetImage('background_tiles2', "background_tiles-spinne");
+         } else {
+            this.map = this.game.add.tilemap('map');
+            this.map.addTilesetImage('background_tiles2');
+    }
         // By conventions the name of tileset in json/tiled this.map
         // and the cacheKey for the tileset image hast to be the same
-        this.map.addTilesetImage('background_tiles2');
+        
 
         //Tiles - rastered Tiles with collision
         this.tileLayer = this.map.createLayer('Tiles');
@@ -67,7 +75,7 @@
                 //self.game.camera.follow(self.player);
             }
         });
-        this.enemy1 = new Enemy1(self.game, 32,220);
+        this.enemy1 = new Enemy1(self.game, 32,230);
                 self.enemies.add(this.enemy1);
 
     };

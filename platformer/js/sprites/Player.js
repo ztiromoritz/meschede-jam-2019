@@ -148,8 +148,8 @@
     };
 
     Player.prototype.killMe = function () {
-        this.hit.play();
-        this.mode = MODES.RESPAWN;
+        //this.hit.play();
+        //this.mode = MODES.RESPAWN;
     };
 
     Player.prototype.setRespawnPoint = function(){

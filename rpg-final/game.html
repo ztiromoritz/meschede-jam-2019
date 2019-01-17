@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Phaser Test</title>
+    <link rel="shortcut icon" type="image/x-icon" href="assets/favicon.png">
+    <link href='./assets/fonts/press_start_2p/PressStart2P.css' rel='stylesheet' type='text/css'>
+    <link href='./css/game.css' rel='stylesheet' type='text/css'>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+</head>
+<body>
+<div  class="wrapper">
+
+   <div id="playground">
+        <div id="game"></div>
+        <div id="playerbar">
+            <div class="value">
+                
+            </div>
+        </div>
+        <div id="hit"></div>
+        <div id="menu">
+            <button id="attackButton">Attack</button>
+            <button id="dodgeButton">Dodge</button>
+            <div id="playerhealth"></div>
+            <div id="enemy1health"></div>
+            <div id="text">
+            </div>
+        </div>
+        <div id= "gameover"><h1>Du bist tot</h1></div>
+        <div id= "victory"><h1>Du lebst</h1></div>
+    </div>
+    
+</div>
+
+
+<script src="./lib/phaser-2.4.9.js"></script>
+<script src="./lib/garfunkel.js"></script>
+
+<script type="text/javascript" src="./bower_components/lodash/lodash.min.js"></script>
+<script type="text/javascript" src="./bower_components/jquery/dist/jquery.min.js"></script>
+
+
+<script type="text/javascript" src="./js/util/game.util.js"></script>
+<script type="text/javascript" src="./js/util/game.fullscreen.js"></script>
+<script type="text/javascript" src="./js/util/game.talk.js"></script>
+<script type="text/javascript" src="./js/util/game.pad.js"></script>
+<script type="text/javascript" src="./js/util/game.eventZone.js"></script>
+<script type="text/javascript" src="./js/util/LabelButton.js"></script>
+<script type="text/javascript" src="./js/util/menu.js"></script>
+
+<script type="text/javascript" src="./js/sprites/Player.js"></script>
+<script type="text/javascript" src="./js/sprites/Enemy1.js"></script>
+
+<script type="text/javascript" src="./js/fight.js"></script>
+<script type="text/javascript" src="./js/states/PreloadState.js"></script>
+<script type="text/javascript" src="./js/states/PlayState.js"></script>
+<script type="text/javascript" src="./js/game.js"></script>
+
+</body>
+</html>

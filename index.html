@@ -14,7 +14,9 @@
     <iframe id="pac-mensch" src="./pac/index.html"></iframe>
     <iframe id="platformer-rino" src="./platformer/game.html"></iframe>
     <iframe id="platformer-spinne" src="./platformer/game.html?spider"></iframe>
-    <iframe id="twine" src="./twine/index.html"></iframe>
+    <iframe id="twine" src="./twine/zoo.html"></iframe>
+   
+    <div id="backToTwine">x</div>
 
     <script>
 
@@ -46,6 +48,13 @@
                 console.log("unknow command received", event.data);
             }))();
         });
+
+        document.querySelector("#backToTwine").addEventListener("click", ()=>{
+            console.log("click");
+            showFrame("twine");
+        })
+
+        showFrame("twine");
     </script>
     
 </body>

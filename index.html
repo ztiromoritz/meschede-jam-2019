@@ -98,12 +98,31 @@
             const command = event.data.command;
             ({
                 hideAll: ()=>{hideAll();},
-                showRPGSpinne: ()=>{showFrame("rpg-spinne");},
-                showRPGGorilla: ()=>{showFrame("rpg-gorilla");},
-                showPacMensch: ()=>{showFrame("pac-mensch");},
-                showPlatformRino: ()=>{showFrame("platformer-rino");},
-                showPlatformSpinne: ()=>{showFrame("platformer-spinne");},
-                showTwine: ()=>{showFrame("twine");},
+                showRPGSpinne: ()=>{
+                    showFrame("rpg-spinne");
+                    playMusic("twineB");
+                },
+                showRPGGorilla: ()=>{
+                    showFrame("rpg-gorilla");
+                     playMusic("bossfight");
+                },
+                showPacMensch: ()=>{
+                    showFrame("pac-mensch");
+                    playMusic("pacB");
+                },
+                showPlatformRino: ()=>{
+                    showFrame("platformer-rino");
+                    playMusic("jumpAndRunC");
+                 },
+                showPlatformSpinne: ()=>{
+                    showFrame("platformer-spinne");
+                    playMusic("jumpAndRunA"); 
+                },
+                showTwine: ()=>{
+                    showFrame("twine");
+                    playMusic("twineA");
+                },
+                playMusic: ()=>{playMusic(event.data.song);}
             }[command] || (()=>{
                 console.log("unknow command received", event.data);
             }))();
@@ -111,10 +130,15 @@
 
         document.querySelector("#backToTwine").addEventListener("click", ()=>{
             console.log("click");
-            showFrame("twine");
+            window.postMessage({command: "showTwine"}, "*");
         })
 
-        showFrame("twine");
+setTimeout(
+    ()=>{
+ window.postMessage({command: "showTwine"}, "*");
+    }, 5000
+);
+       
 
         const songs = {
             bossfight : looper("./sound/music/Bossfight.wav", 4000),
@@ -126,7 +150,8 @@
             pacB : looper("./sound/music/pac-manv2.wav", 4000),
             toteTiere : looper("./sound/music/toteTiere.wav", 4000),
             twineA : looper("./sound/music/Twinev2.wav", 4000),
-            twineB : looper("./sound/music/Twinev3.wav", 4700)
+            twineB : looper("./sound/music/Twinev3.wav", 4700),
+            twineC : looper("./sound/music/title.wav", 40000)
         }
 
         const stopAllMusic = ()=>{

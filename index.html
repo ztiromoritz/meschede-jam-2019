@@ -100,7 +100,7 @@
                 hideAll: ()=>{hideAll();},
                 showRPGSpinne: ()=>{
                     showFrame("rpg-spinne");
-                    playMusic("twineB");
+                    playMusic("pacA");
                 },
                 showRPGGorilla: ()=>{
                     showFrame("rpg-gorilla");
@@ -135,8 +135,9 @@
 
 setTimeout(
     ()=>{
+        console.log("start");
  window.postMessage({command: "showTwine"}, "*");
-    }, 5000
+    }, 20000
 );
        
 
@@ -147,11 +148,11 @@ setTimeout(
             jumpAndRunB : looper("./sound/music/JumpNrunv1.wav", 3450),
             jumpAndRunC : looper("./sound/music/JumpNrunv2.wav", 3450),
             pacA : looper("./sound/music/Pac-manv1.wav", 4000),
-            pacB : looper("./sound/music/pac-manv2.wav", 4000),
+            pacB : looper("./sound/music/pac-manv2.wav", 4800),
             toteTiere : looper("./sound/music/toteTiere.wav", 4000),
             twineA : looper("./sound/music/Twinev2.wav", 4000),
             twineB : looper("./sound/music/Twinev3.wav", 4700),
-            twineC : looper("./sound/music/title.wav", 40000)
+            //twineC : looper("./sound/music/title.wav", 40000)
         }
 
         const stopAllMusic = ()=>{

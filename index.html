@@ -6,6 +6,7 @@
     <title>Meschede 2019</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="./lib/load-music.js"></script>
 </head>
 <body>
 
@@ -21,153 +22,133 @@
     <!--<audio src="./sound/music/Bossfight.wav" loop></audio>-->
 
 
-    <div id="backToTwine">x</div>
+    <div id="backToTwine">back to story</div>
+    <div id="start">Das Biest<br>Click to start</div>
 
     <script>
-
-        const looper = (filename, lengthInMs)=>{
-            let running = false;
-            let current_player = "a";
-            const player_a = document.createElement("audio");
-            const player_b = document.createElement("audio");
-
-            player_a.src = filename;
-            player_b.src = filename;
-
-            const loopIt = ()=>{
-                if(!running)
-                    return;
-                var player = null;
-
-                if(current_player == "a"){
-                    player = player_b;
-                    current_player = "b";
-                }
-                else{
-                    player = player_a;
-                    current_player = "a";
-                }
-
-               player.play();
-               setTimeout(loopIt, lengthInMs); 
-            }
-
-            const stop = ()=>{
-                running = false;
-                player_a.pause();
-                player_b.pause();
-            }
-
-            const start = ()=>{
-                running = true;
-                loopIt();
-            }
-
-            const isLooaded = ()=>{
-
-            }
+       
 
 
-            return {
-                start,
-                stop
+
+
+        const initGame = ()=>{
+            document.querySelector("#start").style.display="none";
+            document.querySelector("#start").removeEventListener("click", initGame);
+
+        
+        window.loadMusic({
+            bossfight : "./sound/music/Bossfight.wav",
+            gameover : "./sound/music/GameOver.wav",
+            jumpAndRunA : "./sound/music/JumNunv2.1.wav",
+            jumpAndRunB : "./sound/music/JumpNrunv1.wav",
+            jumpAndRunC : "./sound/music/JumpNrunv2.wav",
+            pacA : "./sound/music/Pac-manv1.wav",
+            pacB : "./sound/music/pac-manv2.wav",
+            toteTiere : "./sound/music/toteTiere.wav",
+            twineA : "./sound/music/Twinev2.wav",
+            twineB : "./sound/music/Twinev3.wav"
+            //twineC : "./sound/music/title.wav", 40000)
+        }).then(({playMusic})=>{
+            window.playMusic = playMusic;
+            
+            const hideAll = ()=>{
+                [...document.querySelectorAll("iframe")].forEach((frame)=>{
+                    frame.style.display = 'none';
+                })   
             };
 
 
-        }
+            const showFrame = (name)=>{
+                hideAll();
+                document.querySelector(`#${name}`).style.display = 'block';
+            };
 
+            window.addEventListener("message", (event)=>{
+                const command = event.data.command;
+                ({
+                    hideAll: ()=>{hideAll();},
+                    showRPGSpinne: ()=>{
+                        showFrame("rpg-spinne");
+                        playMusic("pacA");
+                    },
+                    showRPGGorilla: ()=>{
+                        showFrame("rpg-gorilla");
+                        playMusic("bossfight");
+                    },
+                    showPacMensch: ()=>{
+                        showFrame("pac-mensch");
+                        playMusic("pacB");
+                    },
+                    showPlatformRino: ()=>{
+                        showFrame("platformer-rino");
+                        playMusic("jumpAndRunC");
+                    },
+                    showPlatformSpinne: ()=>{
+                        showFrame("platformer-spinne");
+                        playMusic("jumpAndRunA"); 
+                    },
+                    showTwine: ()=>{
+                        showFrame("twine");
+                        playMusic("twineA");
+                    },
+                    playMusic: ()=>{playMusic(event.data.song);}
+                }[command] || (()=>{
+                    console.log("unknow command received", event.data);
+                }))();
+            });
 
-        
+            document.querySelector("#backToTwine").addEventListener("click", ()=>{
+                console.log("click");
+                window.postMessage({command: "showTwine"}, "*");
+            })
 
-
-        const hideAll = ()=>{
-            [...document.querySelectorAll("iframe")].forEach((frame)=>{
-                frame.style.display = 'none';
-            })   
-        };
-
-
-        const showFrame = (name)=>{
-            hideAll();
-            document.querySelector(`#${name}`).style.display = 'block';
-        };
-
-
-
-        window.addEventListener("message", (event)=>{
-            const command = event.data.command;
-            ({
-                hideAll: ()=>{hideAll();},
-                showRPGSpinne: ()=>{
-                    showFrame("rpg-spinne");
-                    playMusic("pacA");
-                },
-                showRPGGorilla: ()=>{
-                    showFrame("rpg-gorilla");
-                     playMusic("bossfight");
-                },
-                showPacMensch: ()=>{
-                    showFrame("pac-mensch");
-                    playMusic("pacB");
-                },
-                showPlatformRino: ()=>{
-                    showFrame("platformer-rino");
-                    playMusic("jumpAndRunC");
-                 },
-                showPlatformSpinne: ()=>{
-                    showFrame("platformer-spinne");
-                    playMusic("jumpAndRunA"); 
-                },
-                showTwine: ()=>{
-                    showFrame("twine");
-                    playMusic("twineA");
-                },
-                playMusic: ()=>{playMusic(event.data.song);}
-            }[command] || (()=>{
-                console.log("unknow command received", event.data);
-            }))();
+            window.postMessage({command: "showTwine"}, "*");  
         });
-
-        document.querySelector("#backToTwine").addEventListener("click", ()=>{
-            console.log("click");
-            window.postMessage({command: "showTwine"}, "*");
-        })
-
-setTimeout(
-    ()=>{
-        console.log("start");
- window.postMessage({command: "showTwine"}, "*");
-    }, 20000
-);
        
 
-        const songs = {
-            bossfight : looper("./sound/music/Bossfight.wav", 4000),
-            gameover : looper("./sound/music/GameOver.wav", 4000),
-            jumpAndRunA : looper("./sound/music/JumNunv2.1.wav", 3450),
-            jumpAndRunB : looper("./sound/music/JumpNrunv1.wav", 3450),
-            jumpAndRunC : looper("./sound/music/JumpNrunv2.wav", 3450),
-            pacA : looper("./sound/music/Pac-manv1.wav", 4000),
-            pacB : looper("./sound/music/pac-manv2.wav", 4800),
-            toteTiere : looper("./sound/music/toteTiere.wav", 4000),
-            twineA : looper("./sound/music/Twinev2.wav", 4000),
-            twineB : looper("./sound/music/Twinev3.wav", 4700),
-            //twineC : looper("./sound/music/title.wav", 40000)
-        }
+       };
 
-        const stopAllMusic = ()=>{
-            Object.values(songs).forEach((song)=>{
-                song.stop();
+        document.querySelector("#start").addEventListener("click", initGame);
+
+           
+
+
+        /*
+       
+        // Second audio test
+        loadAudio({
+            bossfight : "./sound/music/Bossfight.wav",
+            gameover : "./sound/music/GameOver.wav",
+            jumpAndRunA : "./sound/music/JumNunv2.1.wav",
+            jumpAndRunB : "./sound/music/JumpNrunv1.wav",
+            jumpAndRunC : "./sound/music/JumpNrunv2.wav",
+            pacA : "./sound/music/Pac-manv1.wav",
+            pacB : "./sound/music/pac-manv2.wav",
+            toteTiere : "./sound/music/toteTiere.wav",
+            twineA : "./sound/music/Twinev2.wav",
+            twineB : "./sound/music/Twinev3.wav",
+            //twineC : "./sound/music/title.wav", 40000)
+        }, {from: './'}).then((buffers)=>{
+            const context = new AudioContext();
+           
+            Object.entries(buffers).forEach((name, buffer)=>{
+                let source = context.createBufferSource();
+                source.connect(context.destination);
+                source.buffer = buffer;
+                source.loop = true;
+                soundz[name]={
+                    start: ()=>{
+                        source.start(0);  
+                    },
+                    stop: ()=>{
+                        source.stop();
+                    }
+                }
             });
-        };
+            console.log("soundz ready");
+        })
+*/
 
-        const playMusic = (name)=>{
-            stopAllMusic();
-            const song=songs[name];
-            if(song){
-                song.start();
-            }
-        };
         
     </script>
     

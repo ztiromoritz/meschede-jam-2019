@@ -9,8 +9,6 @@
     <script src="./lib/load-music.js"></script>
 </head>
 <body>
-
-
     <iframe id="rpg-spinne" src="./rpg-final/game.html?spider"></iframe>
     <iframe id="rpg-gorilla" src="./rpg-final/game.html"></iframe>
     <iframe id="pac-mensch" src="./pac/game.html"></iframe>
@@ -18,138 +16,78 @@
     <iframe id="platformer-spinne" src="./platformer-final/game.html?spider"></iframe>
     <iframe id="twine" src="./twine/zoo.html"></iframe>
 
-    
-    <!--<audio src="./sound/music/Bossfight.wav" loop></audio>-->
-
-
     <div id="backToTwine">back to story</div>
-    <div id="start">Das Biest<br>Click to start</div>
-
+    <div id="start">
+        Das Biest<br>Click to start<br>
+        <div id="progress"><div class="value"></div></div>    
+    </div>
+    
     <script>
-       
-
-
-
-
-        const initGame = ()=>{
-            document.querySelector("#start").style.display="none";
+        const initGame = ()=>{ 
             document.querySelector("#start").removeEventListener("click", initGame);
-
-        
-        window.loadMusic({
-            bossfight : "./sound/music/Bossfight.wav",
-            gameover : "./sound/music/GameOver.wav",
-            jumpAndRunA : "./sound/music/JumNunv2.1.wav",
-            jumpAndRunB : "./sound/music/JumpNrunv1.wav",
-            jumpAndRunC : "./sound/music/JumpNrunv2.wav",
-            pacA : "./sound/music/Pac-manv1.wav",
-            pacB : "./sound/music/pac-manv2.wav",
-            toteTiere : "./sound/music/toteTiere.wav",
-            twineA : "./sound/music/Twinev2.wav",
-            twineB : "./sound/music/Twinev3.wav"
-            //twineC : "./sound/music/title.wav", 40000)
-        }).then(({playMusic})=>{
-            window.playMusic = playMusic;
-            
-            const hideAll = ()=>{
-                [...document.querySelectorAll("iframe")].forEach((frame)=>{
-                    frame.style.display = 'none';
-                })   
-            };
-
-
-            const showFrame = (name)=>{
-                hideAll();
-                document.querySelector(`#${name}`).style.display = 'block';
-            };
-
-            window.addEventListener("message", (event)=>{
-                const command = event.data.command;
-                ({
-                    hideAll: ()=>{hideAll();},
-                    showRPGSpinne: ()=>{
-                        showFrame("rpg-spinne");
-                        playMusic("pacA");
-                    },
-                    showRPGGorilla: ()=>{
-                        showFrame("rpg-gorilla");
-                        playMusic("bossfight");
-                    },
-                    showPacMensch: ()=>{
-                        showFrame("pac-mensch");
-                        playMusic("pacB");
-                    },
-                    showPlatformRino: ()=>{
-                        showFrame("platformer-rino");
-                        playMusic("jumpAndRunC");
-                    },
-                    showPlatformSpinne: ()=>{
-                        showFrame("platformer-spinne");
-                        playMusic("jumpAndRunA"); 
-                    },
-                    showTwine: ()=>{
-                        showFrame("twine");
-                        playMusic("twineA");
-                    },
-                    playMusic: ()=>{playMusic(event.data.song);}
-                }[command] || (()=>{
-                    console.log("unknow command received", event.data);
-                }))();
+            window.loadMusic({
+                bossfight : "./sound/music/Bossfight.wav",
+                gameover : "./sound/music/GameOver.wav",
+                jumpAndRunA : "./sound/music/JumNunv2.1.wav",
+                jumpAndRunB : "./sound/music/JumpNrunv1.wav",
+                jumpAndRunC : "./sound/music/JumpNrunv2.wav",
+                pacA : "./sound/music/Pac-manv1.wav",
+                pacB : "./sound/music/pac-manv2.wav",
+                toteTiere : "./sound/music/toteTiere.wav",
+                twineA : "./sound/music/Twinev2.wav",
+                twineB : "./sound/music/Twinev3.wav"
+                //twineC : "./sound/music/title.wav", 40000)
+            }, (progress)=>{
+                document.querySelector("#progress .value").style.width = `${progress * 100}%`;
+            }).then(({playMusic})=>{
+                document.querySelector("#start").style.display="none";
+                window.playMusic = playMusic;
+                const hideAll = ()=>{[...document.querySelectorAll("iframe")].forEach((frame)=>{frame.style.display = 'none';})};
+                const showFrame = (name)=>{
+                    hideAll();
+                    document.querySelector(`#${name}`).style.display = 'block';
+                };
+                window.addEventListener("message", (event)=>{
+                    const command = event.data.command;
+                    ({
+                        hideAll: ()=>{hideAll();},
+                        showRPGSpinne: ()=>{
+                            showFrame("rpg-spinne");
+                            playMusic("pacA");
+                        },
+                        showRPGGorilla: ()=>{
+                            showFrame("rpg-gorilla");
+                            playMusic("bossfight");
+                        },
+                        showPacMensch: ()=>{
+                            showFrame("pac-mensch");
+                            playMusic("pacB");
+                        },
+                        showPlatformRino: ()=>{
+                            showFrame("platformer-rino");
+                            playMusic("jumpAndRunC");
+                        },
+                        showPlatformSpinne: ()=>{
+                            showFrame("platformer-spinne");
+                            playMusic("jumpAndRunA"); 
+                        },
+                        showTwine: ()=>{
+                            showFrame("twine");
+                            playMusic("twineA");
+                        },
+                        playMusic: ()=>{playMusic(event.data.song);}
+                    }[command] || (()=>{
+                        console.log("unknow command received", event.data);
+                    }))();
+                });
+                document.querySelector("#backToTwine").addEventListener("click", ()=>{
+                    console.log("click");
+                    window.postMessage({command: "showTwine"}, "*");
+                })
+                window.postMessage({command: "showTwine"}, "*");  
             });
-
-            document.querySelector("#backToTwine").addEventListener("click", ()=>{
-                console.log("click");
-                window.postMessage({command: "showTwine"}, "*");
-            })
-
-            window.postMessage({command: "showTwine"}, "*");  
-        });
-       
-
-       };
-
-        document.querySelector("#start").addEventListener("click", initGame);
-
-           
-
-
-        /*
-       
-        // Second audio test
-        loadAudio({
-            bossfight : "./sound/music/Bossfight.wav",
-            gameover : "./sound/music/GameOver.wav",
-            jumpAndRunA : "./sound/music/JumNunv2.1.wav",
-            jumpAndRunB : "./sound/music/JumpNrunv1.wav",
-            jumpAndRunC : "./sound/music/JumpNrunv2.wav",
-            pacA : "./sound/music/Pac-manv1.wav",
-            pacB : "./sound/music/pac-manv2.wav",
-            toteTiere : "./sound/music/toteTiere.wav",
-            twineA : "./sound/music/Twinev2.wav",
-            twineB : "./sound/music/Twinev3.wav",
-            //twineC : "./sound/music/title.wav", 40000)
-        }, {from: './'}).then((buffers)=>{
-            const context = new AudioContext();
-           
-            Object.entries(buffers).forEach((name, buffer)=>{
-                let source = context.createBufferSource();
-                source.connect(context.destination);
-                source.buffer = buffer;
-                source.loop = true;
-                soundz[name]={
-                    start: ()=>{
-                        source.start(0);  
-                    },
-                    stop: ()=>{
-                        source.stop();
-                    }
-                }
-            });
-            console.log("soundz ready");
-        })
-*/
-
-        
+        };
+       document.querySelector("#start").addEventListener("click", initGame);       
     </script>
     
 </body>

@@ -39,3 +39,17 @@ iframe {
     font-family: monospace;
     text-align: center; 
 }
+
+#progress {
+    width: 180px;
+    height: 18px;
+    border: solid 2px black;
+    background-color: lightgrey;
+    margin: 50px auto;
+}
+
+#progress .value {
+    width: 0%;
+    height: 18px;
+    background-color: green;
+}
